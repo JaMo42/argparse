@@ -2,12 +2,26 @@
 
 namespace argparse {
 
-bool validate_option(const Option& opt) {
-    const bool has_posix = opt.flag != 0;
-    return (has_posix || opt.long_opt != "")
-        && (has_posix && opt.value = has_value::optional);
+inline bool Option::operator== (const Option &other) const {
+    const bool has_posix = flag != 0;
+    const bool has_long = long_opt != "";
+    return (name == other.name)
+        || (has_posix ? (flag == other.flag) : false)
+        || (has_long ? (long_opt == other.long_opt) : false);
 }
 
-inline bool Option::operator== (const Option &other) const
-    return name == other.name || flag == other.flag || long_opt == other.long_opt;
+bool validate_option(const Option& opt) {
+    const bool has_posix = opt.flag != 0;
+    return (opt.name != "")
+        && (has_posix || opt.long_opt != "")
+        && (has_posix ? (opt.value != has_value::optional) : true)
+        && (has_posix ? isalnum(opt.flag) : true);
+}
+
+bool contains_option(const std::vector<Option> &options, const Option &check) {
+    return !std::none_of(options.begin(), options.end(), [&](const Option &opt) {
+        return opt == check;
+    });
+}
+
 }

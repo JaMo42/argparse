@@ -1,5 +1,6 @@
 #ifndef OPTION_H
 #define OPTION_H
+#include "stdafx.h"
 
 namespace argparse {
 
@@ -37,8 +38,17 @@ struct Option {
  * Checks that the option has either a short or long option.
  * Checks that the value is compatible with the option (if it has a short
  * option, it cannot have an option argument).
+ * Checks that the option has a name.
+ * Checks that the POSIX flag, if given, is alphanumeric.
  * @param opt - The option to validate
  */
 bool validate_option(const Option& opt);
+
+/**
+ * @brief Checks if a vector of option contains a option.
+ */
+bool contains_option(const std::vector<Option> &options, const Option &check);
+
+}
 
 #endif /* !OPTION_H */
