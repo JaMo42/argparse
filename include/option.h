@@ -10,7 +10,7 @@ enum has_value {
     optional = 0b11,
     // Bit masks
     _has_value = 0b10,
-    _value_opt = 0b01;
+    _value_opt = 0b01
 };
 
 struct Option {
@@ -24,6 +24,12 @@ struct Option {
     std::string_view long_opt {""};
     // What type of argument the option takes
     has_value value {has_value::none};
+
+    /**
+     * @brief Check if two options are equal
+     * Two option count as equal, if either their name, flag or long option is equal.
+     */
+    bool operator== (const Option &other) const;
 };
 
 /**
@@ -34,9 +40,5 @@ struct Option {
  * @param opt - The option to validate
  */
 bool validate_option(const Option& opt);
-    const bool has_posix = opt.flag != 0;
-    return (has_posix || opt.long_opt != "")
-        && (has_posix && opt.value = has_value::optional);
-}
 
 #endif /* !OPTION_H */
