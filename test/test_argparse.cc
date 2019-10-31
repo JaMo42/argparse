@@ -118,3 +118,18 @@ TEST_F(ArgparseTest, Abbreviated) {
     ASSERT_EQ(args.count("standart"), 1);
     ASSERT_EQ(args.count("some_name"), 0); // This also matches -s, but should be ignored
 }
+
+TEST_F(ArgparseTest, TerminateOptions) {
+    const char *argv[] = {prog_path, "hello", "-f", "--secret", "--", "-a", "10", "world", "-O3"};
+    int argc = 9;
+    Arguments args = parser->parse(argc, argv);
+    const std::vector<std::string_view> expected = {"hello", "-a", "10", "world", "-O3"};
+    ASSERT_EQ(args.parameters, expected);
+}
+
+TEST_F(ArgparseTest, SingleDash) {
+    const char *argv[] = {prog_path, "-"};
+    int argc = 2;
+    Arguments args = parser->parse(argc, argv);
+    ASSERT_EQ(args.count("-"), 1);
+}
