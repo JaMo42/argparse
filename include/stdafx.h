@@ -11,6 +11,7 @@
 #include <forward_list>
 #include <optional>
 
+#include <iostream>
 #include <algorithm>
 
 #endif /* !STDAFX_H */

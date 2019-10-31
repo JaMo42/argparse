@@ -14,6 +14,9 @@ public: // Settings
     // posix options.
     bool allow_abbreviations = false;
 
+    // If true, inhibit option error messages
+    bool option_errors = true;
+
 public:
     /**
      * @brief Adds an option to the parser.
@@ -44,22 +47,22 @@ private:
     std::size_t option_index(std::string_view flag) const;
 
     /**
-     * @brief Parses a long option.
-     * Arguments are self explanatory.
+     * @brief Initializes @ref Arguments structure
+     * Creates entries for all registered options.
+     * @param result - The struct to initialize
      */
+    void init_args(Arguments &result) const;
+
     int parse_long_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
+        const std::size_t eq_pos,
         Arguments &result
     ) const;
-    
-    /**
-     * @brief Parses a posix option.
-     * Arguments are self explanatory.
-     */
+
     int parse_posix_option(
         int argc, const char **argv,
-        int &pos, std::string_view flag,
+        int &pos, std::string_view name,
         Arguments &result
     ) const;
 
