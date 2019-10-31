@@ -12,7 +12,7 @@ struct Arguments {
         // Number of times the option was given
         int count;
         // Arguments passed to the option
-        std::forward_list<std::string_view> values;
+        std::forward_list<std::string> values;
     };
 
     // Parameters given to the program
@@ -35,6 +35,14 @@ struct Arguments {
      * @return false, if the option does not have any arguments given ot does not exist.
      */
     bool option_has_arg(
+        std::string_view name
+    );
+
+    /**
+     * @brief Returns the number of times, an option was given
+     * @param name - The name of the option
+     */
+    int count(
         std::string_view name
     );
 

@@ -16,7 +16,8 @@ struct ArgumentsTest : public ::testing::Test {
     ArgumentsTest() {
         args = std::make_unique<Arguments>();
         auto &opts = args->options;
-        opts["no_value"] = {1, std::forward_list<std::string_view>()};
+        // This would be optional, hence count is 1
+        opts["no_value"] = {1, std::forward_list<std::string>()};
         opts["single_value"] = {1, {"3.141"}};
         opts["multiple_values"] = {4, {"Hello", ",", "World", "!"}};
     }
@@ -64,4 +65,10 @@ TEST_F(ArgumentsTest, NextArg) {
     ASSERT_TRUE(args->next_arg("multiple_values", out));
     ASSERT_TRUE(out == "!");
     ASSERT_FALSE(args->next_arg("multiple_values", out));
+}
+
+TEST_F(ArgumentsTest, Count) {
+    ASSERT_EQ(args->count("no_value"), 1);
+    ASSERT_EQ(args->count("single_value"), 1);
+    ASSERT_EQ(args->count("multiple_values"), 4);
 }

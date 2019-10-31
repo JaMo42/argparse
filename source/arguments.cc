@@ -17,6 +17,12 @@ bool Arguments::option_has_arg(std::string_view name) {
     return false;
 }
 
+int Arguments::count(std::string_view name) {
+    if (this->has_option(name))
+        return options[name].count;
+    return 0;
+}
+
 bool Arguments::next_arg(std::string_view name, std::string &out, bool _no_checks) {
     if (_no_checks || this->has_option(name))
         if (_no_checks || this->option_has_arg(name)) {

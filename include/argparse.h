@@ -53,14 +53,14 @@ private:
      */
     void init_args(Arguments &result) const;
 
-    int parse_long_option(
+    void parse_long_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
         const std::size_t eq_pos,
         Arguments &result
     ) const;
 
-    int parse_posix_option(
+    void parse_posix_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
         Arguments &result
