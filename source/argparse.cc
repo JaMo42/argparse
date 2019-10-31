@@ -20,8 +20,8 @@ Arguments ArgumentParser::parse(int argc, const char **argv) const {
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '-' && !terminate_options) {
             if (strlen(argv[i]) == 1) {
-                // Single -, ignore
-                continue;
+                // Single -
+                result.options["-"].count++;
             } else if (strcmp(argv[i], "--") == 0) {
                 // --, terminate option parsing
                 terminate_options = true;
@@ -64,6 +64,7 @@ void ArgumentParser::init_args(Arguments &result) const {
     for (const Option &opt : options) {
         result.options[opt.name] = {0, {}};
     }
+    result.options["-"] = {0, {}};
 }
 
 void ArgumentParser::parse_long_option(
