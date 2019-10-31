@@ -6,7 +6,7 @@ A C++ argument parser inspired by pythons argparse module.
 
 ### Argument syntax
 
-Both POSIX and GNU long option are supported. Syntax follows [GNU Argument Syntax](https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html)
+Both POSIX and GNU long option are supported. Argument syntax follows the [GNU Argument Syntax](https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html).
 
 1. Arguments are options if they begin with a hyphen delimiter (‘-’).
 
@@ -26,8 +26,6 @@ Both POSIX and GNU long option are supported. Syntax follows [GNU Argument Synta
 
 8. A token consisting of a single hyphen character is interpreted as an ordinary non-option argument. By convention, it is used to specify input from or output to the standard input and output streams.
 
-   - This is currently ignored
-
 9. Options may be supplied in any order, or appear multiple times. The interpretation is left up to the particular application program.
 
 Long options:
@@ -45,8 +43,6 @@ In addition to this, the syntax `-O3` will be interpreted as `-OOO`, this can in
 - C++17 or higher
 
 ## @TODO
-
-- Do something with `-` instead of ignoring it.
 
 - Create a constructor for `ArgumentParser`, allowing to set parser settings
 
