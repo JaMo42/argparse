@@ -16,10 +16,9 @@ struct ArgumentsTest : public ::testing::Test {
     ArgumentsTest() {
         args = std::make_unique<Arguments>();
         auto &opts = args->options;
-        opts["non_existent"] = {};
-        opts["no_value"] = {std::forward_list<std::string_view>()};
-        opts["single_value"] = {{"3.141"}};
-        opts["multiple_values"] = {{"Hello", ",", "World", "!"}};
+        opts["no_value"] = {1, std::forward_list<std::string_view>()};
+        opts["single_value"] = {1, {"3.141"}};
+        opts["multiple_values"] = {4, {"Hello", ",", "World", "!"}};
     }
 
 };

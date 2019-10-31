@@ -5,13 +5,20 @@
 namespace argparse {
 
 struct Arguments {
-    // List of arguments the option has.
-    // If the value is not present, the option was not given.
-    using ArgVal = std::optional<std::forward_list<std::string_view>>;
+    friend class ArgumentParser;
+
+    // Stores option data
+    struct _OptData {
+        // Number of times the option was given
+        int count;
+        // Arguments passed to the option
+        std::forward_list<std::string_view> values;
+    };
+
     // Parameters given to the program
     std::vector<std::string_view> parameters;
     // Options given to the program.
-    std::map<std::string_view, ArgVal> options;
+    std::map<std::string_view, _OptData> options;
 
     /**
      * @brief Checks whether an option is given.
@@ -48,6 +55,7 @@ struct Arguments {
         std::string &out,
         bool _no_checks = false
     );
+
 };
 
 }
