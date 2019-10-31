@@ -2,6 +2,7 @@
 #define STDAFX_H
 
 #include <cstdio>
+#include <cstring>
 
 #include <string>
 #include <string_view>
