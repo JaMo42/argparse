@@ -1,4 +1,5 @@
 #include "argparse.h"
+#include "string_type.h"
 #include "gtest/gtest.h"
 #include <memory>
 using namespace argparse;
@@ -46,13 +47,13 @@ TEST_F(ArgparseTest, Parameters) {
     const char *argv[] = {prog_path, "-a", "5", "--flag", "Hello, ", "-b", "2", "World!"};
     int argc = 8;
     const Arguments args = parser->parse(argc, argv);
-    const std::vector<std::string_view> expected = {"Hello, ", "World!"};
+    const std::vector<string_type> expected = {"Hello, ", "World!"};
     ASSERT_EQ(args.parameters, expected);
 }
 
 TEST_F(ArgparseTest, PosixFlagSingleNoValue) {
     const char *argv[] = {prog_path, "hello", "-i", "world", "-o", "-f"};
-    int argc = 7;
+    int argc = 6;
     Arguments args = parser->parse(argc, argv);
     ASSERT_EQ(args.count("input_flag"), 1);
     ASSERT_EQ(args.count("optimization"), 1);
@@ -116,14 +117,14 @@ TEST_F(ArgparseTest, Abbreviated) {
     int argc = 2;
     Arguments args = parser_abbr->parse(argc, argv);
     ASSERT_EQ(args.count("standart"), 1);
-    ASSERT_EQ(args.count("some_name"), 0); // This also matches -s, but should be ignored
+    ASSERT_EQ(args.count("some_name"), 0); // This also matches -s..., but should be ignored
 }
 
 TEST_F(ArgparseTest, TerminateOptions) {
     const char *argv[] = {prog_path, "hello", "-f", "--secret", "--", "-a", "10", "world", "-O3"};
     int argc = 9;
     Arguments args = parser->parse(argc, argv);
-    const std::vector<std::string_view> expected = {"hello", "-a", "10", "world", "-O3"};
+    const std::vector<string_type> expected = {"hello", "-a", "10", "world", "-O3"};
     ASSERT_EQ(args.parameters, expected);
 }
 
