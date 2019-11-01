@@ -10,7 +10,7 @@ A C++ argument parser inspired by pythons argparse module.
 int main(int argc, const char **argv) {
 ```
 
-### `ArgumentParser`
+### ArgumentParser
 
 #### Creation
 
@@ -53,7 +53,7 @@ See **[below](#Options)** for more information about the `Options` struct and wh
     Arguments args = parser.parse(argc, argv);
 ```
 
-### `Arguments`
+### Arguments
 
 #### Checking wheter an option exists
 
@@ -90,7 +90,7 @@ Optionally you can run the following to neither check if the option exists, or i
 } // closes the main function
 ```
 
-### `Options`
+### Options
 
 The struct is declared as
 
@@ -106,7 +106,7 @@ struct Option {
 
 In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](#Argument-Syntax)** for information about what a valid value is.
 
-### `has_value`
+### has_value
 
 ```cpp
 enum has_value {
