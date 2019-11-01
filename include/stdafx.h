@@ -5,7 +5,9 @@
 #include <cstring>
 
 #include <string>
-#include <string_view>
+#if __has_include(<string_view>)
+# include <string_view>
+#endif
 #include <vector>
 #include <map>
 #include <forward_list>
