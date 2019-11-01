@@ -30,7 +30,7 @@ Arguments ArgumentParser::parse(int argc, const char **argv) const {
                 const std::string tok = argv[i];
                 const std::size_t eq_pos = tok.find('=');
                 const int offset = (int)(argv[i][1] == '-') + 1;
-                const string_type name = tok.substr(offset, eq_pos - offset);
+                const std::string_view name = tok.substr(offset, eq_pos - offset);
                 if (offset >= 2 // Argument is a long flag
                     // Abbreviations are enabled, and a matching option was found;
                     || (allow_abbreviations && this->option_index(name) != std::string::npos)) {
@@ -52,7 +52,7 @@ std::size_t ArgumentParser::option_index(const char& flag) const {
     return option_letters.find(flag);
 }
 
-std::size_t ArgumentParser::option_index(string_type flag) const {
+std::size_t ArgumentParser::option_index(std::string_view flag) const {
     const auto it = std::find(option_long.begin(), option_long.end(), flag);
     if (it == option_long.end())
         return std::string::npos;
@@ -69,7 +69,7 @@ void ArgumentParser::init_args(Arguments &result) const {
 
 void ArgumentParser::parse_long_option(
     int argc, const char **argv,
-    int &pos, string_type name,
+    int &pos, std::string_view name,
     const std::size_t eq_pos,
     Arguments &result
 ) const {
@@ -85,7 +85,7 @@ void ArgumentParser::parse_long_option(
         // The option takes an argument
         if (eq_pos == std::string::npos) {
             // The argument is the next ARGV-element
-            const string_type next = ((pos + 1) < argc) ? argv[pos + 1] : "???";
+            const std::string_view next = ((pos + 1) < argc) ? argv[pos + 1] : "???";
             if (next[0] == '-' || ((pos + 1) == argc)) {
                 // The next ARGV-element is an option, or there is no next element
                 if (option.value && has_value::_value_opt) {
@@ -116,7 +116,7 @@ void ArgumentParser::parse_long_option(
 
 void ArgumentParser::parse_posix_option(
     int argc, const char **argv,
-    int &pos, string_type name,
+    int &pos, std::string_view name,
     Arguments &result
 ) const {
     const Option &first = options[this->option_index(name[0])];
@@ -124,7 +124,7 @@ void ArgumentParser::parse_posix_option(
         // The option takes an argument
         if (name.length() > 1) {
             // Argument is attached to the option
-            result.options[first.name].values.push_front(get_c_str(name) + 1);
+            result.options[first.name].values.push_front(name.data() + 1);
             result.options[first.name].count++;
         } else {
             // Argument is the next ARGV-element
@@ -142,10 +142,10 @@ void ArgumentParser::parse_posix_option(
         }
     } else {
         // Flag, without the fist option
-        string_type rest = {get_c_str(name) + 1};
+        std::string_view rest = {name.data() + 1};
         if (!std::all_of(rest.begin(), rest.end(), ::isalpha)) {
             // The first option followed by a number, interpret as count flag
-            result.options[first.name].count += std::stoi(get_c_str(rest));
+            result.options[first.name].count += std::stoi(rest.data());
         } else {
             // Increase count for all given flags by one
             for (std::size_t c = 0; c < name.length(); c++) {

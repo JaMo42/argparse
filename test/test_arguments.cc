@@ -5,7 +5,7 @@ using namespace argparse;
 
 namespace {
     struct Testcase {
-        const string_type name;
+        const std::string_view name;
         const bool expected;
     };
 }

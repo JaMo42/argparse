@@ -1,12 +1,9 @@
 #include "argparse.h"
-#include "string_type.h"
 #include "gtest/gtest.h"
 #include <memory>
 using namespace argparse;
 
 #define prog_path "/path/to/program/program_name"
-#define make_parser std::make_unique<ArgumentParser>
-#define add_arg(opt) parser->add_argument(opt); parser_abbr->add_argument(opt)
 
 struct ArgparseTest : public ::testing::Test {
     // Normal parser
@@ -29,11 +26,9 @@ struct ArgparseTest : public ::testing::Test {
             Option{.name = "some_name", .flag = 's'}
         };
         // Create argument parsers
-        parser = make_parser();
-        //parser->option_errors = false;
-        parser_abbr = make_parser();
+        parser = std::make_unique<ArgumentParser>();
+        parser_abbr = std::make_unique<ArgumentParser>();
         parser_abbr->allow_abbreviations = true;
-        //parser_abbr->option_errors = false;
         // Add arguments
         for (const Option &opt : options) {
             parser->add_argument(opt);
@@ -47,7 +42,7 @@ TEST_F(ArgparseTest, Parameters) {
     const char *argv[] = {prog_path, "-a", "5", "--flag", "Hello, ", "-b", "2", "World!"};
     int argc = 8;
     const Arguments args = parser->parse(argc, argv);
-    const std::vector<string_type> expected = {"Hello, ", "World!"};
+    const std::vector<std::string_view> expected = {"Hello, ", "World!"};
     ASSERT_EQ(args.parameters, expected);
 }
 
@@ -124,7 +119,7 @@ TEST_F(ArgparseTest, TerminateOptions) {
     const char *argv[] = {prog_path, "hello", "-f", "--secret", "--", "-a", "10", "world", "-O3"};
     int argc = 9;
     Arguments args = parser->parse(argc, argv);
-    const std::vector<string_type> expected = {"hello", "-a", "10", "world", "-O3"};
+    const std::vector<std::string_view> expected = {"hello", "-a", "10", "world", "-O3"};
     ASSERT_EQ(args.parameters, expected);
 }
 

@@ -3,7 +3,6 @@
 #include "stdafx.h"
 #include "option.h"
 #include "arguments.h"
-#include "string_type.h"
 
 namespace argparse {
 
@@ -45,7 +44,7 @@ private:
     /**
      * @brief Find the index of an option suing its long option.
      */
-    std::size_t option_index(string_type flag) const;
+    std::size_t option_index(std::string_view flag) const;
 
     /**
      * @brief Initializes @ref Arguments structure
@@ -56,14 +55,14 @@ private:
 
     void parse_long_option(
         int argc, const char **argv,
-        int &pos, string_type name,
+        int &pos, std::string_view name,
         const std::size_t eq_pos,
         Arguments &result
     ) const;
 
     void parse_posix_option(
         int argc, const char **argv,
-        int &pos, string_type name,
+        int &pos, std::string_view name,
         Arguments &result
     ) const;
 
@@ -72,7 +71,7 @@ private:
     std::vector<Option> options;
     // The following are used to find the index of an option using its flag
     // Holds all the long options in the same order as in the options vector
-    std::vector<string_type> option_long;
+    std::vector<std::string_view> option_long;
     // Holds all the posix options in the same order as in the options vector
     std::string option_letters;
 };

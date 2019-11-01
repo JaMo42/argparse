@@ -1,7 +1,6 @@
 #ifndef OPTION_H
 #define OPTION_H
 #include "stdafx.h"
-#include "string_type.h"
 
 namespace argparse {
 
@@ -17,13 +16,13 @@ enum has_value {
 
 struct Option {
     // The name of the option in the @ref Arguments struct
-    string_type name;
+    std::string_view name;
     // A short desciption of the option
-    string_type description {""};
+    std::string_view description {""};
     // The POSIX flag of the option
     char flag {0};
     // The long option of the option
-    string_type long_opt {""};
+    std::string_view long_opt {""};
     // What type of argument the option takes
     has_value value {has_value::none};
 
