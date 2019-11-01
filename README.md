@@ -40,7 +40,35 @@ In addition to this, the syntax `-O3` will be interpreted as `-OOO`, this can in
 
 ## Requirements
 
-- C++17 or higher
+- CMake
+
+## Building
+
+### Building:
+
+```
+.../argparse $ mkdir build
+.../argparse & cd build
+.../argparse/build $ cmake ..
+```
+
+Unix systems:
+
+```
+.../argparse/build $ make
+```
+
+Windows:
+
+Running cmake will generate a Visual Studio Solution, open with Visual Studio and compile.
+
+Optionally you can call cmake with `-G "MinGW Makefiles"` to generate a Makefile and the use make.
+
+### Installing:
+
+```
+$ sudo make install
+```
 
 ## @TODO
 
