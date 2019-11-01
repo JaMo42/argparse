@@ -5,7 +5,7 @@
 #include <cstring>
 
 #include <string>
-#if __has_include(<string_view>)
+#if (__cplusplus >= 201500)
 # include <string_view>
 #endif
 #include <vector>

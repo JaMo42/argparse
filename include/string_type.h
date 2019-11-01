@@ -1,8 +1,7 @@
 #ifndef STRING_TYPE_H
 #define STRING_TYPE_H
 
-#if (__cpp_lib_string_view >= 201606)
-    && __has_include(<string_view>)
+#if (__cplusplus >= 201500)
 // std::string_view is available
 
 using string_type = std::string_view;
