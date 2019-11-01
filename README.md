@@ -4,7 +4,121 @@ A C++ argument parser inspired by pythons argparse module.
 
 ## Usage
 
-### Argument syntax
+```cpp
+#include "argparse.h"
+
+int main(int argc, const char **argv) {
+```
+
+### `ArgumentParser`
+
+#### Creation
+
+```cpp
+    ArgumentParser parser;
+```
+
+There is not constructor.
+
+#### Configuring
+
+  - set `allow_abbreviations` to true, in order to allow long options to have a sginle `-` (See **[below](###Argument-Syntax)** for more information).
+
+  - Set `option_errors` to false, in order to disable option error messages.
+
+  Defaults:
+
+```cpp
+    parser.allow_abbreviations = false;
+    parser.option_errors = true;
+```
+
+#### Adding arguments
+
+```cpp
+    parser.add_argument(Option{
+        "name",
+        "short description",
+        'f',
+        "long-option",
+        has_value::required
+    });
+```
+
+See **[below](###Options)** for more information about the `Options` struct and what values are required.
+
+#### Parsing
+
+```cpp
+    Arguments args = parser.parse(argc, argv);
+```
+
+### `Arguments`
+
+#### Checking wheter an option exists
+
+```cpp
+    const bool hello_exists = args.has_option("hello");
+```
+
+#### Check how many times an option was given
+
+```cpp
+    const int verbosity = args.count("verbosity");
+    const bool has_hello = args.count("hello") >= 1;
+```
+
+#### Check whether an option still has a value
+
+```cpp
+    const bool hello_has_val = args.option_has_arg("hello");
+```
+
+#### Get the next argument of an option
+
+```cpp
+    std::string out;
+    bool read = args.next_arg("hello", out);
+```
+
+Return `true` if there was an argument and it was written (same as `option_has_arg`).
+Optionally you can run the following to neither check if the option exists, or if it has a value. This is a (little) bit faster, but may try popping from an empty list, causing an exception.
+
+```cpp
+    bool read = args.next_arg("hello", out, true);
+
+} // closes the main function
+```
+
+### `Options`
+
+The struct is declared as
+
+```cpp
+struct Option {
+    std::string_view name;
+    std::string_view description {""};
+    char flag {0};
+    std::string_view long_opt {""};
+    has_value value {has_value::none};
+};
+```
+
+In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](###Argument-Syntax)** for information about what a valid value is.
+
+### `has_value`
+
+```cpp
+enum has_value {
+    none = 0b00,
+    required = 0b10,
+    optional = 0b11,
+};
+```
+
+The values should be self explanatory.
+
+### Argument Syntax
 
 Both POSIX and GNU long option are supported. Argument syntax follows the [GNU Argument Syntax](https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html).
 
@@ -72,8 +186,4 @@ $ sudo make install
 
 ## @TODO
 
-- Write usage documentation
-
 - Create help text generator
-
-- Maybe create `std::string` alternatives to everything that uses `std::string_view` to be C++14 compatible

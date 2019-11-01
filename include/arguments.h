@@ -21,9 +21,8 @@ struct Arguments {
     std::map<std::string_view, _OptData> options;
 
     /**
-     * @brief Checks whether an option is given.
+     * @brief Checks whether an option exists.
      * @param name - The name of the option.
-     * @return false, if the option was not given or does not exist
      */
     bool has_option(
         std::string_view name

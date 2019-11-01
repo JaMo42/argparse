@@ -8,7 +8,7 @@ bool Arguments::has_option(std::string_view name) const {
     if (it == options.end())
         return false;
     // Return if it was given
-    return it->second.count >= 1;
+    return true;
 }
 
 bool Arguments::option_has_arg(std::string_view name) {

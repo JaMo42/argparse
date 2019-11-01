@@ -18,7 +18,8 @@ bool validate_option(const Option& opt) {
         && (has_posix ? isalnum(opt.flag) : true)
         && (std::all_of(opt.long_opt.begin(), opt.long_opt.end(), [&](const char c) {
                 return ::isalnum(c) || (c == '-');
-            }));
+            }))
+        && (long_opt.length() >= 1);
 }
 
 bool contains_option(const std::vector<Option> &options, const Option &check) {
