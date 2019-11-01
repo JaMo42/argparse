@@ -21,3 +21,6 @@ add_executable(argparse_test ${TEST_SOURCES})
 set_target_properties(argparse_test PROPERTIES OUTPUT_NAME "test")
 target_link_libraries(argparse_test PRIVATE GTest::GTest GTest::Main argparse)
 add_test(AllTestsInMain argparse_test)
+# Install
+install(TARGETS argparse DESTINATION lib)
+install(FILES "include/argparse.h" DESTINATION include)
