@@ -1,6 +1,7 @@
 #ifndef ARGUMENTS_H
 #define ARGUMENTS_H
 #include "stdafx.h"
+#include "string_type.h"
 
 namespace argparse {
 
@@ -16,9 +17,9 @@ struct Arguments {
     };
 
     // Parameters given to the program
-    std::vector<std::string_view> parameters;
+    std::vector<string_type> parameters;
     // Options given to the program.
-    std::map<std::string_view, _OptData> options;
+    std::map<string_type, _OptData> options;
 
     /**
      * @brief Checks whether an option is given.
@@ -26,7 +27,7 @@ struct Arguments {
      * @return false, if the option was not given or does not exist
      */
     bool has_option(
-        std::string_view name
+        string_type name
     ) const;
 
     /**
@@ -35,7 +36,7 @@ struct Arguments {
      * @return false, if the option does not have any arguments given ot does not exist.
      */
     bool option_has_arg(
-        std::string_view name
+        string_type name
     );
 
     /**
@@ -43,7 +44,7 @@ struct Arguments {
      * @param name - The name of the option
      */
     int count(
-        std::string_view name
+        string_type name
     );
 
     /**
@@ -59,7 +60,7 @@ struct Arguments {
      * @return false, if there were no more arguments for the option or the option does not exist.
      */
     bool next_arg(
-        std::string_view name,
+        string_type name,
         std::string &out,
         bool _no_checks = false
     );
