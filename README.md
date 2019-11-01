@@ -22,7 +22,7 @@ There is not constructor.
 
 #### Configuring
 
-  - set `allow_abbreviations` to true, in order to allow long options to have a sginle `-` (See **[below](###Argument-Syntax)** for more information).
+  - set `allow_abbreviations` to true, in order to allow long options to have a sginle `-` (See **[below](#Argument-Syntax)** for more information).
 
   - Set `option_errors` to false, in order to disable option error messages.
 
@@ -45,7 +45,7 @@ There is not constructor.
     });
 ```
 
-See **[below](###Options)** for more information about the `Options` struct and what values are required.
+See **[below](#Options)** for more information about the `Options` struct and what values are required.
 
 #### Parsing
 
@@ -104,7 +104,7 @@ struct Option {
 };
 ```
 
-In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](###Argument-Syntax)** for information about what a valid value is.
+In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](#Argument-Syntax)** for information about what a valid value is.
 
 ### `has_value`
 
