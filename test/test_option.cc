@@ -23,14 +23,16 @@ TEST(OptionTest, ValidateOption) {
         {{"opt2", "", 'h', "hello", has_value::none}, true},
         // Required value
         {{"opt3", "", 'a', "" , has_value::required}, true},
-        {{"opt4", "", 0, "also_a", has_value::required}, true},
-        {{"opt5", "", 'b', "sill_b", has_value::required}, true},
+        {{"opt4", "", 0, "also-a", has_value::required}, true},
+        {{"opt5", "", 'b', "sill-b", has_value::required}, true},
         // Optional value
         {{"opt6", "", 'o', "", has_value::optional}, false},
         {{"opt7", "", 0, "opt", has_value::optional}, true},
         {{"opt7", "", 'w', "world", has_value::optional}, false},
-        // Special character posix flag
-        {{"opt8", "", '$', "", has_value::none}, false}
+        // Special characters
+        {{"opt8", "", '$', "", has_value::none}, false},
+        {{"opt8", "", 0, "@fl~ag%", has_value::none}, false},
+        {{"opt8", "", 0, "under_score", has_value::none}, false}
     };
     for (const ::Testcase &test_case : test_cases) {
         EXPECT_EQ(validate_option(test_case.option), test_case.expected);
