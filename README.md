@@ -44,10 +44,8 @@ In addition to this, the syntax `-O3` will be interpreted as `-OOO`, this can in
 
 ## @TODO
 
-- Create a constructor for `ArgumentParser`, allowing to set parser settings
+- Write usage documentation
 
 - Create help text generator
 
-
-
-
+- Maybe create `std::string` alternatives to everything that uses `std::string_view` to be C++14 compatible
