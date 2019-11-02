@@ -26,7 +26,7 @@ There is not constructor.
 
   - Set `option_errors` to false, in order to disable option error messages.
 
-  Defaults:
+Defaults:
 
 ```cpp
     parser.allow_abbreviations = false;
@@ -104,7 +104,7 @@ struct Option {
 };
 ```
 
-In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](#Argument-Syntax)** for information about what a valid value is.
+In order to be valid, either `flag` of `long_opt` must have valid value. See **[below](#Argument-Syntax)**(3. & 10.) for information about what a valid value is.
 
 ### has_value
 
