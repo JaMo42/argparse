@@ -19,7 +19,7 @@ bool validate_option(const Option& opt) {
         && (std::all_of(opt.long_opt.begin(), opt.long_opt.end(), [&](const char c) {
                 return ::isalnum(c) || (c == '-');
             }))
-        && (long_opt.length() >= 1);
+        && (opt.long_opt == "" ? true : opt.long_opt.length() >= 1);
 }
 
 bool contains_option(const std::vector<Option> &options, const Option &check) {
