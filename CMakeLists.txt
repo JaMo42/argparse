@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 # Build options
-add_compile_options("-std=c++17" "-Wall")
+add_compile_options("-std=c++17" "-Wall" "-march=native" "-O2")
 # Set sources and include directories
 file(GLOB LIB_SOURCES
     "source/*.cc"
