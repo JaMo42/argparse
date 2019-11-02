@@ -24,4 +24,5 @@ target_link_libraries(argparse_test PRIVATE GTest::GTest GTest::Main argparse)
 add_test(AllTestsInMain argparse_test)
 # Install
 install(TARGETS argparse DESTINATION lib)
+install(TARGETS argparse_static DESTINATION lib)
 install(FILES "include/argparse.h" DESTINATION include)
