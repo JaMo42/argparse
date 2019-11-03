@@ -2,6 +2,9 @@
 
 namespace argparse {
 
+ArgumentParser::ArgumentParser(std::string_view program_name)
+    : program_name(program_name) {}
+
 bool ArgumentParser::add_argument(const Option &opt) {
     // Whether an option with the same name already exists
     const bool name_exists = std::find_if(options.begin(), options.end(), [&](const Option &o) {
@@ -13,18 +16,19 @@ bool ArgumentParser::add_argument(const Option &opt) {
     const bool long_exists = std::find(option_long.begin(), option_long.end(), opt.long_opt) != option_long.end();
     if (!validate_option(opt)) {
         // Option did not validate
-        std::cout << "Error: Invalid option\n" << std::endl;
+        std::cout << program_name << ": Invalid option\n" << std::endl;
         return false;
     } else if (name_exists) {
-        std::cout << "Error: Option already exists: " << opt.name << std::endl;
+        // Duplicate name
+        std::cout << program_name << ": Option already exists: " << opt.name << std::endl;
         return false;
     } else if (opt.flag != 0 && flag_exists) {
         // Duplicate flag
-        std::cout << "Error: Flag already exists --" << opt.flag << std::endl;
+        std::cout << program_name << ": Flag already exists --" << opt.flag << std::endl;
         return false;
     } else if (opt.long_opt != "" && long_exists) {
         // Duplicate long option
-        std::cout << "Error: option `--" << opt.long_opt << "' already exists" << std::endl;
+        std::cout << program_name << ": option `--" << opt.long_opt << "' already exists" << std::endl;
         return false;
     }
     // Add the option
@@ -98,7 +102,7 @@ void ArgumentParser::parse_long_option(
     if (opt_ind == std::string::npos) {
         // The option does not exist
         if (option_errors)
-            std::cerr << argv[0] << ": unrecognized option `--" << name << '\'' <<std::endl;
+            std::cerr << program_name << ": unrecognized option `--" << name << '\'' <<std::endl;
         return;
     }
     const Option &option = options[opt_ind];
@@ -115,7 +119,7 @@ void ArgumentParser::parse_long_option(
                 } else {
                     // otherwise, print error
                     if (option_errors)
-                        std::cerr << argv[0] << ": option `--" << name << "' requires an argument" << std::endl;
+                        std::cerr << program_name << ": option `--" << name << "' requires an argument" << std::endl;
                     return;
                 }
             } else {
@@ -153,7 +157,7 @@ void ArgumentParser::parse_posix_option(
             if (next[0] == '-') {
                 // Next ARGV-element is an option
                 if (option_errors)
-                    std::cerr << argv[0] << ": option requires an argument -- " << name[0] << std::endl;
+                    std::cerr << program_name << ": option requires an argument -- " << name[0] << std::endl;
                 return;
             } else {
                 result.options[first.name].values.push_front(next);
@@ -174,7 +178,7 @@ void ArgumentParser::parse_posix_option(
                 if (opt_ind == std::string::npos) {
                     // Option does not exist
                     if (option_errors)
-                        std::cerr << argv[0] << ": invalid option -- " << name[c] << std::endl;
+                        std::cerr << program_name << ": invalid option -- " << name[c] << std::endl;
                     return;
                 } else {
                     result.options[options[opt_ind].name].count++;

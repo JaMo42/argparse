@@ -3,7 +3,8 @@
 #include <memory>
 using namespace argparse;
 
-#define prog_path "/path/to/program/program_name"
+constexpr const char *prog_path = "/path/to/program/program_name";
+constexpr const char *prog_name = "program_name";
 
 struct ArgparseTest : public ::testing::Test {
     // Normal parser
@@ -22,12 +23,12 @@ struct ArgparseTest : public ::testing::Test {
             Option{.name = "optional", .long_opt = "opt", .value = has_value::optional},
             Option{.name = "optimization", .flag = 'o'},
             Option{.name = "secret", .long_opt = "secret"},
-            Option{.name = "standart", .long_opt = "std", .value = has_value::required},
+            Option{.name = "standard", .long_opt = "std", .value = has_value::required},
             Option{.name = "some_name", .flag = 's'}
         };
         // Create argument parsers
-        parser = std::make_unique<ArgumentParser>();
-        parser_abbr = std::make_unique<ArgumentParser>();
+        parser = std::make_unique<ArgumentParser>(prog_name);  // Construct with program name detection
+        parser_abbr = std::make_unique<ArgumentParser>(prog_name);  // Construct with custom program name
         parser_abbr->allow_abbreviations = true;
         // Add arguments
         for (const Option &opt : options) {
@@ -96,22 +97,22 @@ TEST_F(ArgparseTest, LongOptionValue) {
     int argc = 7;
     Arguments args = parser->parse(argc, argv);
     ASSERT_EQ(args.count("optional"), 2);
-    ASSERT_EQ(args.count("standart"), 1);
+    ASSERT_EQ(args.count("standard"), 1);
     std::string out;
     ASSERT_TRUE(args.next_arg("optional", out));
     ASSERT_EQ(out, "10");
     ASSERT_FALSE(args.next_arg("optional", out));
 
-    ASSERT_TRUE(args.next_arg("standart", out));
+    ASSERT_TRUE(args.next_arg("standard", out));
     ASSERT_EQ(out, "C++17");
-    ASSERT_FALSE(args.next_arg("standart", out));
+    ASSERT_FALSE(args.next_arg("standard", out));
 }
 
 TEST_F(ArgparseTest, Abbreviated) {
     const char *argv[] = { prog_path, "-std=C++17" };
     int argc = 2;
     Arguments args = parser_abbr->parse(argc, argv);
-    ASSERT_EQ(args.count("standart"), 1);
+    ASSERT_EQ(args.count("standard"), 1);
     ASSERT_EQ(args.count("some_name"), 0); // This also matches -s..., but should be ignored
 }
 

@@ -18,6 +18,12 @@ public: // Settings
     bool option_errors = true;
 
 public:
+
+    /**
+     * @param program_name - The name of the program
+     */
+    ArgumentParser(std::string_view program_name = "");
+
     /**
      * @brief Adds an option to the parser.
      * @param opt - The option to add.
@@ -47,7 +53,7 @@ private:
     std::size_t option_index(std::string_view flag) const;
 
     /**
-     * @brief Initializes @ref Arguments structure.
+     * @brief Initializes arguments.
      * Creates entries for all registered options.
      * @param result - The struct to initialize.
      */
@@ -80,6 +86,8 @@ private:
     std::vector<std::string_view> option_long;
     // Holds all the posix options in the same order as in the options vector
     std::string option_letters;
+    // Name of the program
+    std::string_view program_name;
 };
 
 }
