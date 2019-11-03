@@ -22,7 +22,7 @@ public:
      * @brief Adds an option to the parser.
      * @param opt - The option to add.
      * @return Whether the option was accepted, false if the option itself was
-     * not valid, or the same name/flags as an  existing option.
+     * not valid, or has the same name/flags as an  existing option.
      */
     bool add_argument(const Option &opt);
 
@@ -47,12 +47,15 @@ private:
     std::size_t option_index(std::string_view flag) const;
 
     /**
-     * @brief Initializes @ref Arguments structure
+     * @brief Initializes @ref Arguments structure.
      * Creates entries for all registered options.
-     * @param result - The struct to initialize
+     * @param result - The struct to initialize.
      */
     void init_args(Arguments &result) const;
 
+    /**
+     * @brief Parses a long option.
+     */
     void parse_long_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
@@ -60,6 +63,9 @@ private:
         Arguments &result
     ) const;
 
+    /**
+     * @brief Pares a posix option.
+     */
     void parse_posix_option(
         int argc, const char **argv,
         int &pos, std::string_view name,

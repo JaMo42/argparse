@@ -17,7 +17,7 @@ enum has_value {
 struct Option {
     // The name of the option in the @ref Arguments struct
     std::string_view name;
-    // A short desciption of the option
+    // A short description of the option
     std::string_view description {""};
     // The POSIX flag of the option
     char flag {0};
@@ -27,7 +27,7 @@ struct Option {
     has_value value {has_value::none};
 
     /**
-     * @brief Check if two options are equal
+     * @brief Check if two options are equal.
      * Two option count as equal, if either their name, flag or long option is equal.
      */
     bool operator== (const Option &other) const;
@@ -40,7 +40,7 @@ struct Option {
  * option, it cannot have an option argument).
  * Checks that the option has a name.
  * Checks that the POSIX flag, if given, is alphanumeric.
- * @param opt - The option to validate
+ * @param opt - The option to validate.
  */
 bool validate_option(const Option& opt);
 
