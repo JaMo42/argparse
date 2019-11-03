@@ -16,6 +16,7 @@ bool ArgumentParser::add_argument(const Option &opt) {
         std::cout << "Error: Invalid option\n" << std::endl;
         return false;
     } else if (name_exists) {
+        // Duplicate name
         std::cout << "Error: Option already exists: " << opt.name << std::endl;
         return false;
     } else if (opt.flag != 0 && flag_exists) {
