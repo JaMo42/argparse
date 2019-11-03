@@ -3,6 +3,10 @@
 namespace argparse {
 
 bool ArgumentParser::add_argument(const Option &opt) {
+    // Whether an option with the same name already exists
+    const bool name_exists = std::find_if(options.begin(), options.end(), [&](const Option &o) {
+        return o.name == opt.name;
+    }) != options.end();
     // Whether the flag already exists
     const bool flag_exists = option_letters.find(opt.flag) != std::string::npos;
     // Whether the long option already exists
@@ -10,6 +14,9 @@ bool ArgumentParser::add_argument(const Option &opt) {
     if (!validate_option(opt)) {
         // Option did not validate
         std::cout << "Error: Invalid option\n" << std::endl;
+        return false;
+    } else if (name_exists) {
+        std::cout << "Error: Option already exists: " << opt.name << std::endl;
         return false;
     } else if (opt.flag != 0 && flag_exists) {
         // Duplicate flag
