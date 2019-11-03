@@ -15,10 +15,10 @@ int main(int argc, const char **argv) {
 #### Creation
 
 ```cpp
-    ArgumentParser parser;
+    ArgumentParser parser(argv[0]);
 ```
 
-There is not constructor.
+The constructor takes the name of the program as argument. This gets used for help and error messages.
 
 #### Configuring
 
