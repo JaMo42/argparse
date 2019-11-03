@@ -10,7 +10,7 @@ file(GLOB TEST_SOURCES
 )
 include_directories(include)
 # Create library
-project(argparse VERSION 1.0 DESCRIPTION "C++ argument parser")
+project(argparse VERSION 1.1 DESCRIPTION "C++ argument parser")
 add_library(argparse SHARED ${LIB_SOURCES})
 add_library(argparse_static ${LIB_SOURCES})
 # Load google tests
