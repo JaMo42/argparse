@@ -36,7 +36,6 @@ struct ArgparseTest : public ::testing::Test {
             parser_abbr->add_argument(opt);
         }
     }
-
 };
 
 TEST_F(ArgparseTest, Parameters) {

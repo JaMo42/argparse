@@ -5,8 +5,7 @@
 namespace argparse {
 
 struct Arguments {
-    friend class ArgumentParser;
-
+    
     // Stores option data
     struct _OptData {
         // Number of times the option was given
@@ -62,7 +61,6 @@ struct Arguments {
         std::string &out,
         bool _no_checks = false
     );
-
 };
 
 }

@@ -8,7 +8,6 @@ namespace argparse {
 
 class ArgumentParser {
 public: // Settings
-
     // Whether to allow long option to have a single -.
     // In this case, long options are checked for before
     // posix options.
@@ -18,7 +17,6 @@ public: // Settings
     bool option_errors = true;
 
 public:
-
     /**
      * @param program_name - The name of the program
      */
@@ -41,7 +39,6 @@ public:
     Arguments parse(int argc, const char **argv) const;
 
 private:
-
     /**
      * @brief Find the index of an option using its flag.
      */

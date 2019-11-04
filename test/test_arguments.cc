@@ -21,7 +21,6 @@ struct ArgumentsTest : public ::testing::Test {
         opts["single_value"] = {1, {"3.141"}};
         opts["multiple_values"] = {4, {"Hello", ",", "World", "!"}};
     }
-
 };
 
 TEST_F(ArgumentsTest, HasOption) {
