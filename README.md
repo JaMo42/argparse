@@ -183,7 +183,3 @@ Optionally you can call cmake with `-G "MinGW Makefiles"` to generate a Makefile
 ```
 $ sudo make install
 ```
-
-## @TODO
-
-- Create help text generator
