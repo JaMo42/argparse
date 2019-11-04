@@ -5,7 +5,6 @@
 namespace argparse {
 
 struct Arguments {
-    
     // Stores option data
     struct _OptData {
         // Number of times the option was given
