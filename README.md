@@ -1,6 +1,7 @@
 # argparse
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jamo42/argparse/badge)](https://www.codefactor.io/repository/github/jamo42/argparse)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6e11a48d2d3d46259121be09ace2ff70)](https://www.codacy.com/manual/JaMo42/argparse?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JaMo42/argparse&amp;utm_campaign=Badge_Grade)
 
 A C++ argument parser inspired by pythons argparse module.
 
