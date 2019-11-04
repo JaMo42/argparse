@@ -1,5 +1,7 @@
 # argparse
 
+[![CodeFactor](https://www.codefactor.io/repository/github/jamo42/argparse/badge)](https://www.codefactor.io/repository/github/jamo42/argparse)
+
 A C++ argument parser inspired by pythons argparse module.
 
 ## Usage
