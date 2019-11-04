@@ -22,9 +22,9 @@ The constructor takes the name of the program as argument. This gets used for he
 
 #### Configuring
 
-  - set `allow_abbreviations` to true, in order to allow long options to have a sginle `-` (See **[below](#Argument-Syntax)** for more information).
+-   set `allow_abbreviations` to true, in order to allow long options to have a sginle `-` (See **[below](#Argument-Syntax)** for more information).
 
-  - Set `option_errors` to false, in order to disable option error messages.
+-   Set `option_errors` to false, in order to disable option error messages.
 
 Defaults:
 
@@ -122,25 +122,25 @@ The values should be self explanatory.
 
 Both POSIX and GNU long option are supported. Argument syntax follows the [GNU Argument Syntax](https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html).
 
-1. Arguments are options if they begin with a hyphen delimiter (‘-’).
+1.  Arguments are options if they begin with a hyphen delimiter (‘-’).
 
-2. Multiple options may follow a hyphen delimiter in a single token if the options do not take arguments. Thus, ‘-abc’ is equivalent to ‘-a -b -c’.
+2.  Multiple options may follow a hyphen delimiter in a single token if the options do not take arguments. Thus, ‘-abc’ is equivalent to ‘-a -b -c’.
 
-3. Option names are single alphanumeric characters (as for`isalnum`).
+3.  Option names are single alphanumeric characters (as for`isalnum`).
 
-4. Certain options require an argument. For example, the ‘-o’ command of the`ld`command requires an argument—an output file name.
+4.  Certain options require an argument. For example, the ‘-o’ command of the`ld`command requires an argument—an output file name.
 
-5. An option and its argument may or may not appear as separate tokens. (In other words, the whitespace separating them is optional.) Thus, ‘-o foo’and ‘-ofoo’ are equivalent.
+5.  An option and its argument may or may not appear as separate tokens. (In other words, the whitespace separating them is optional.) Thus, ‘-o foo’and ‘-ofoo’ are equivalent.
 
-6. Options typically precede other non-option arguments.
+6.  Options typically precede other non-option arguments.
 
-   - This is not a requirement for this parser.
+    -   This is not a requirement for this parser.
 
-7. The argument ‘--’ terminates all options; any following arguments are treated as non-option arguments, even if they begin with a hyphen.
+7.  The argument ‘--’ terminates all options; any following arguments are treated as non-option arguments, even if they begin with a hyphen.
 
-8. A token consisting of a single hyphen character is interpreted as an ordinary non-option argument. By convention, it is used to specify input from or output to the standard input and output streams.
+8.  A token consisting of a single hyphen character is interpreted as an ordinary non-option argument. By convention, it is used to specify input from or output to the standard input and output streams.
 
-9. Options may be supplied in any order, or appear multiple times. The interpretation is left up to the particular application program.
+9.  Options may be supplied in any order, or appear multiple times. The interpretation is left up to the particular application program.
 
 Long options:
 
@@ -154,13 +154,13 @@ In addition to this, the syntax `-O3` will be interpreted as `-OOO`, this can in
 
 ## Requirements
 
-- CMake
+-   CMake
 
 ## Building
 
-### Building:
+### Building
 
-```
+```sh
 .../argparse $ mkdir build
 .../argparse & cd build
 .../argparse/build $ cmake ..
@@ -168,7 +168,7 @@ In addition to this, the syntax `-O3` will be interpreted as `-OOO`, this can in
 
 Unix systems:
 
-```
+```sh
 .../argparse/build $ make
 ```
 
@@ -178,8 +178,8 @@ Running cmake will generate a Visual Studio Solution, open with Visual Studio an
 
 Optionally you can call cmake with `-G "MinGW Makefiles"` to generate a Makefile and the use make.
 
-### Installing:
+### Installing
 
-```
+```sh
 $ sudo make install
 ```

@@ -13,8 +13,8 @@ namespace {
 struct ArgumentsTest : public ::testing::Test {
     std::unique_ptr<Arguments> args;
 
-    ArgumentsTest() {
-        args = std::make_unique<Arguments>();
+    ArgumentsTest()
+        : args{std::make_unique<Arguments>()} {
         auto &opts = args->options;
         // This would be optional, hence count is 1
         opts["no_value"] = {1, std::forward_list<std::string>()};

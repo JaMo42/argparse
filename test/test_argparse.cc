@@ -12,7 +12,9 @@ struct ArgparseTest : public ::testing::Test {
     // Parser with abbreviations enabled
     std::unique_ptr<ArgumentParser> parser_abbr;
 
-    ArgparseTest() {
+    ArgparseTest()
+        : parser{std::make_unique<ArgumentParser>(prog_name)},
+        parser_abbr{std::make_unique<ArgumentParser>(prog_name)} {
         // Options
         const std::vector<Option> options = {
             Option{.name = "flag", .flag = 'f', .long_opt = "flag"},
@@ -26,9 +28,6 @@ struct ArgparseTest : public ::testing::Test {
             Option{.name = "standard", .long_opt = "std", .value = has_value::required},
             Option{.name = "some_name", .flag = 's'}
         };
-        // Create argument parsers
-        parser = std::make_unique<ArgumentParser>(prog_name);  // Construct with program name detection
-        parser_abbr = std::make_unique<ArgumentParser>(prog_name);  // Construct with custom program name
         parser_abbr->allow_abbreviations = true;
         // Add arguments
         for (const Option &opt : options) {
