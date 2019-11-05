@@ -20,7 +20,7 @@ public:
     /**
      * @param program_name - The name of the program
      */
-    ArgumentParser(std::string_view program_name = "");
+    ArgumentParser(std::string_view program_name);
 
     /**
      * @brief Adds an option to the parser.
