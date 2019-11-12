@@ -58,6 +58,14 @@ See **[below](#Options)** for more information about the `Options` struct and wh
 
 ### Arguments
 
+#### Check for parsing errors
+
+```cpp
+    const bool args_ok = arg.ok();
+```
+
+Returns `false` if either there was an unknown option or an option was missing its argument.
+
 #### Checking wheter an option exists
 
 ```cpp
