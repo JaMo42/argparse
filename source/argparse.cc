@@ -60,10 +60,14 @@ Arguments ArgumentParser::parse(int argc, const char **argv) const {
                     // Abbreviations are enabled, and a matching option was found;
                     || (allow_abbreviations && this->option_index(name) != std::string::npos)) {
                     // Long option
-                    this->parse_long_option(argc, argv, i, name, eq_pos, result);
+                    if(!this->parse_long_option(argc, argv, i, name, eq_pos, result)) {
+                        result.args_ok = false;
+                    }
                 } else {
                     // POSIX option
-                    this->parse_posix_option(argc, argv, i, name, result);
+                    if(this->parse_posix_option(argc, argv, i, name, result)) {
+                        result.args_ok = false;
+                    }
                 }
             }
         } else {
@@ -92,7 +96,7 @@ void ArgumentParser::init_args(Arguments &result) const {
     result.options["-"] = {0, {}};
 }
 
-void ArgumentParser::parse_long_option(
+bool ArgumentParser::parse_long_option(
     int argc, const char **argv,
     int &pos, std::string_view name,
     const std::size_t eq_pos,
@@ -103,7 +107,7 @@ void ArgumentParser::parse_long_option(
         // The option does not exist
         if (option_errors)
             std::cerr << program_name << ": unrecognized option `--" << name << '\'' <<std::endl;
-        return;
+        return false;
     }
     const Option &option = options[opt_ind];
     if (option.value & has_value::_has_value) {
@@ -120,7 +124,7 @@ void ArgumentParser::parse_long_option(
                     // otherwise, print error
                     if (option_errors)
                         std::cerr << program_name << ": option `--" << name << "' requires an argument" << std::endl;
-                    return;
+                    return false;
                 }
             } else {
                 // There is an ARGV-element after the option
@@ -137,9 +141,10 @@ void ArgumentParser::parse_long_option(
     } else {
         result.options[option.name].count++;
     }
+    return true;
 }
 
-void ArgumentParser::parse_posix_option(
+bool ArgumentParser::parse_posix_option(
     int argc, const char **argv,
     int &pos, std::string_view name,
     Arguments &result
@@ -158,7 +163,7 @@ void ArgumentParser::parse_posix_option(
                 // Next ARGV-element is an option
                 if (option_errors)
                     std::cerr << program_name << ": option requires an argument -- " << name[0] << std::endl;
-                return;
+                return false;
             } else {
                 result.options[first.name].values.push_front(next);
                 result.options[first.name].count++;
@@ -179,13 +184,14 @@ void ArgumentParser::parse_posix_option(
                     // Option does not exist
                     if (option_errors)
                         std::cerr << program_name << ": invalid option -- " << name[c] << std::endl;
-                    return;
+                    return false;
                 } else {
                     result.options[options[opt_ind].name].count++;
                 }
             }
         }
     }
+    return true;
 }
 
 }

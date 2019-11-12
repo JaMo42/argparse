@@ -33,4 +33,8 @@ bool Arguments::next_arg(std::string_view name, std::string &out, bool _no_check
     return false;
 }
 
+bool Arguments::ok() {
+    return args_ok;
+}
+
 }

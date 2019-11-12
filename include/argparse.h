@@ -58,8 +58,9 @@ private:
 
     /**
      * @brief Parses a long option.
+     * @return false if there were errors
      */
-    void parse_long_option(
+    bool parse_long_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
         const std::size_t eq_pos,
@@ -68,8 +69,9 @@ private:
 
     /**
      * @brief Pares a posix option.
+     * @return false if there were errors
      */
-    void parse_posix_option(
+    bool parse_posix_option(
         int argc, const char **argv,
         int &pos, std::string_view name,
         Arguments &result
