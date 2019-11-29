@@ -23,7 +23,7 @@ bool validate_option(const Option& opt) {
 }
 
 bool contains_option(const std::vector<Option> &options, const Option &check) {
-    return !std::none_of(options.begin(), options.end(), [&](const Option &opt) {
+    return std::any_of(options.begin(), options.end(), [&](const Option &opt) {
         return opt == check;
     });
 }
