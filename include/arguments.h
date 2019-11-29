@@ -66,7 +66,7 @@ struct Arguments {
     /**
      * @return false if there were errors during argument parsing, otherwise true.
      */
-    bool ok();
+    bool ok() const;
 
 protected:
     bool args_ok;
