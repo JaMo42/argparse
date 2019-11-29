@@ -5,6 +5,8 @@
 namespace argparse {
 
 struct Arguments {
+    // Give the argument parser access to args_ok
+    friend class ArgumentParser;
     // Stores option data
     struct _OptData {
         // Number of times the option was given
