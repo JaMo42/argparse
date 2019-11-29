@@ -60,7 +60,6 @@ struct Arguments {
         std::string &out,
         bool _no_checks = false
     );
-<<<<<<< HEAD
 
     /**
      * @return false if there were errors during argument parsing, otherwise true.
@@ -69,8 +68,6 @@ struct Arguments {
 
 protected:
     bool args_ok;
-=======
->>>>>>> b7745b3fca08970079d383bbe2f416010b6faa6c
 };
 
 }
