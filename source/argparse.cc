@@ -52,7 +52,7 @@ Arguments ArgumentParser::parse(int argc, const char **argv) const {
                 terminate_options = true;
             } else {
                 // Get the name/flag[s] of the argument
-                const std::string tok = argv[i];
+                const std::string_view tok = argv[i];
                 const std::size_t eq_pos = tok.find('=');
                 const int offset = (int)(argv[i][1] == '-') + 1;
                 const std::string_view name = tok.substr(offset, eq_pos - offset);
